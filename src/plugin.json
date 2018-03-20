@@ -1,0 +1,18 @@
+{
+  "type": "panel",
+  "name": "Annotation list",
+  "id": "annolist",
+
+  "info": {
+    "description": "List of Annotations",
+    "author": {
+      "name": "Grafana Project",
+      "url": "https://grafana.com"
+    },
+    "logos": {
+      "small": "img/icn-annolist-panel.svg",
+      "large": "img/icn-annolist-panel.svg"
+    },
+    "version": "5.0.0"
+  }
+}

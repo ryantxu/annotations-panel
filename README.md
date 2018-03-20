@@ -1,2 +1,3 @@
-# annotations-panel
-Annotatoins List Panel
+## Annotations Panel
+
+This should be included with grafana :)
