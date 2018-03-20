@@ -1,6 +1,6 @@
 {
   "type": "panel",
-  "name": "Annotation list",
+  "name": "Annotation List",
   "id": "annolist",
 
   "info": {
@@ -13,6 +13,6 @@
       "small": "img/icn-annolist-panel.svg",
       "large": "img/icn-annolist-panel.svg"
     },
-    "version": "5.0.0"
+    "version": "5.0.2"
   }
 }

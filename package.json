@@ -1,7 +1,7 @@
 {
   "name": "annolist",
   "version": "0.0.1",
-  "description": "Discrete Events in Grafana",
+  "description": "Annotations List",
   "scripts": {
     "build": "grunt",
     "test": "./node_modules/karma/bin/karma start",
