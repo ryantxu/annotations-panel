@@ -1,7 +1,7 @@
 ///<reference path="../node_modules/grafana-sdk-mocks/app/headers/common.d.ts" />
 
 import _ from 'lodash';
-import {PanelCtrl} from 'app/plugins/sdk';
+import { PanelCtrl } from 'app/plugins/sdk';
 import moment from 'moment';
 
 class AnnoListCtrl extends PanelCtrl {
@@ -21,13 +21,7 @@ class AnnoListCtrl extends PanelCtrl {
   };
 
   /** @ngInject */
-  constructor(
-    $scope,
-    $injector,
-    private backendSrv,
-    private annotationsSrv,
-    private dashboardSrv
-  ) {
+  constructor($scope, $injector, private backendSrv, private annotationsSrv, private dashboardSrv) {
     super($scope, $injector);
     _.defaults(this.panel, AnnoListCtrl.panelDefaults);
 
@@ -65,8 +59,8 @@ class AnnoListCtrl extends PanelCtrl {
     });
   }
 
-  selectAnno(anno: any, evt?: any) {
-    console.log('GOTO', anno);
+  selectAnno(anno:any, evt?:any) {
+    console.log( 'GOTO', anno );
 
     if (evt) {
       evt.stopPropagation();
@@ -74,8 +68,8 @@ class AnnoListCtrl extends PanelCtrl {
     }
   }
 
-  selectTag(anno: any, tag: string, evt?: any) {
-    console.log('TAG', anno, tag);
+  selectTag(anno:any, tag:string, evt?:any) {
+    console.log( 'TAG', anno, tag );
 
     if (evt) {
       evt.stopPropagation();
@@ -84,4 +78,4 @@ class AnnoListCtrl extends PanelCtrl {
   }
 }
 
-export {AnnoListCtrl, AnnoListCtrl as PanelCtrl};
+export { AnnoListCtrl, AnnoListCtrl as PanelCtrl };

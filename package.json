@@ -1,5 +1,5 @@
 {
-  "name": "ryantxu-annolist-panel",
+  "name": "annolist",
   "version": "0.0.1",
   "description": "Discrete Events in Grafana",
   "scripts": {
@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.74",
-    "grafana-sdk-mocks": "github:grafana/grafana-sdk-mocks",
+    "grafana-sdk-mocks": "github:ryantxu/grafana-sdk-mocks",
     "grunt": "^1.0.1",
     "grunt-contrib-clean": "^1.1.0",
     "grunt-contrib-copy": "^1.0.0",
