@@ -38,7 +38,7 @@ System.register(['lodash', 'app/plugins/sdk', 'moment', './css/annolist.css!'], 
                 }
                 AnnoListCtrl.prototype.onInitEditMode = function () {
                     this.editorTabIndex = 1;
-                    this.addEditorTab('Options', 'public/plugins/annolist/editor.html');
+                    this.addEditorTab('Options', 'public/plugins/ryantxu-annolist-panel/editor.html');
                 };
                 AnnoListCtrl.prototype.onRefresh = function () {
                     var promises = [];
@@ -46,13 +46,13 @@ System.register(['lodash', 'app/plugins/sdk', 'moment', './css/annolist.css!'], 
                     return Promise.all(promises).then(this.renderingCompleted.bind(this));
                 };
                 AnnoListCtrl.prototype.getSearch = function () {
-                    var _this = this;
                     // http://docs.grafana.org/http_api/annotations/
                     // https://github.com/grafana/grafana/blob/master/public/app/core/services/backend_srv.ts
                     // https://github.com/grafana/grafana/blob/master/public/app/features/annotations/annotations_srv.ts
+                    var _this = this;
                     var params = {
-                        limit: this.panel.limit,
                         tags: this.panel.tags,
+                        limit: this.panel.limit,
                     };
                     if (this.panel.onlyFromThisDashboard) {
                         params.dashboardId = this.dashboard.id;
@@ -79,33 +79,44 @@ System.register(['lodash', 'app/plugins/sdk', 'moment', './css/annolist.css!'], 
                 };
                 AnnoListCtrl.prototype.selectAnno = function (anno, evt) {
                     var _this = this;
-                    var range = {
-                        from: this._timeOffset(anno.time, this.panel.navigateBefore, true),
-                        to: this._timeOffset(anno.time, this.panel.navigateAfter, false),
-                    };
-                    this.timeSrv.setTime(range);
                     if (evt) {
                         evt.stopPropagation();
                         evt.preventDefault();
                     }
+                    var range = {
+                        from: this._timeOffset(anno.time, this.panel.navigateBefore, true),
+                        to: this._timeOffset(anno.time, this.panel.navigateAfter, false),
+                    };
+                    // Link to the panel on the same dashboard
                     if (this.dashboard.id === anno.dasboardId) {
-                        console.log('Same Dashboard!!');
+                        this.timeSrv.setTime(range);
+                        if (this.panel.navigateToPanel) {
+                            this.$location.search('panelId', anno.panelId);
+                            this.$location.search('fullscreen', true);
+                        }
                         return;
                     }
                     this.backendSrv.get('/api/search', { dashboardIds: anno.dashboardId }).then(function (res) {
                         if (res && res.length === 1 && res[0].id === anno.dashboardId) {
-                            // TODO... is there a better way?
-                            console.log('GOTO Dashboard:', res[0]);
-                            _this.$location.path(res[0].url);
-                            _this.$location.search('edit', null);
+                            var dash = res[0];
+                            var path = dash.url;
+                            if (!path) {
+                                path = dash.uri;
+                            }
+                            var params = {
+                                from: range.from.valueOf().toString(),
+                                to: range.to.valueOf().toString(),
+                            };
                             if (_this.panel.navigateToPanel) {
-                                _this.$location.search('panelId', anno.panelId);
-                                _this.$location.search('fullscreen', true);
+                                params.panelId = anno.panelId;
+                                params.fullscreen = true;
                             }
-                            else {
-                                _this.$location.search('panelId', null);
-                                _this.$location.search('fullscreen', null);
+                            var orgId = _this.$location.search().orgId;
+                            if (orgId) {
+                                params.orgId = orgId;
                             }
+                            console.log('SEARCH', path, params);
+                            _this.$location.path(path).search(params);
                         }
                         else {
                             console.log('Unable to find dashboard...', anno);

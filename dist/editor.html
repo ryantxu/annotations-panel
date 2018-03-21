@@ -28,21 +28,6 @@
   <div class="section gf-form-group">
     <h5 class="section-heading">Search</h5>
 
-<!--
-    <div class="gf-form">
-      <span class="gf-form-label width-6">Query</span>
-      <input type="text" class="gf-form-input" placeholder="title query" ng-model="ctrl.panel.query" ng-change="ctrl.refresh()" ng-model-onblur>
-    </div>
-
-    <div class="gf-form">
-      <folder-picker  root-name="All"
-                      initial-folder-id="ctrl.panel.folderId"
-                      on-change="ctrl.onFolderChange($folder)"
-                      label-class="width-6">
-      </folder-picker>
-    </div>
-  -->
-
     <gf-form-switch 
       class="gf-form" 
       label="Only This Dashboard" 
@@ -65,7 +50,6 @@
       <input class="gf-form-input max-width-5" type="number" ng-model="ctrl.panel.limit" ng-model-onblur ng-change="ctrl.refresh()">
     </div>
   </div>
-
 
   <div class="section gf-form-group">
     <h5 class="section-heading">Navigate</h5>

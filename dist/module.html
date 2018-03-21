@@ -12,8 +12,15 @@
         <span class="dashlist-title">
           {{anno.text}}
         </span>
-        <span ng-show="ctrl.panel.showTags" class="pluginlist-message">
-          <span 
+        <span class="pluginlist-message">
+          <span ng-show="ctrl.panel.showUser && anno.login" class="graph-annotation">
+            <span class="graph-annotation__user" bs-tooltip="'Created by:<br/> {{anno.email}}'">
+              <img src="{{anno.avatarUrl}}" />
+            </span>
+          </span>
+
+          <span
+            ng-show="ctrl.panel.showTags" 
             ng-click="ctrl.selectTag(anno, tag, $event)" 
             ng-repeat="tag in anno.tags" 
             tag-color-from-name="tag" 
@@ -22,15 +29,8 @@
           </span>
         </span>
         <span class="pluginlist-version">
-          <span ng-show="ctrl.panel.showUser && anno.login">
-            <span class="graph-annotation__user" bs-tooltip="'Created by {{anno.email}}'">
-              <img ng-src="{{anno.avatar}}">
-              {{anno.login}}
-            </span>
-          </span>
-
           <span ng-show="ctrl.panel.showTime">
-            @ {{ moment(anno.time).format() }}
+            {{ ctrl.dashboard.formatDate(anno.time) }}
           </span>
         </span>
       </a>

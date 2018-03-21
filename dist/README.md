@@ -4,8 +4,8 @@ Show list of annotations
 
 ### Screenshots
 
-* [Options](https://raw.githubusercontent.com/ryantxu/annotations-panel/master/src/img/screenshot-options.png)
-* [Links  ](https://raw.githubusercontent.com/ryantxu/annotations-panel/master/src/img/screenshot-link.png)
+![Options](https://raw.githubusercontent.com/ryantxu/annotations-panel/master/src/img/screenshot-options.png)
+![Links ](https://raw.githubusercontent.com/ryantxu/annotations-panel/master/src/img/screenshot-link.png)
 
 #### Changelog
 
