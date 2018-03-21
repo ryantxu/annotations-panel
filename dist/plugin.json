@@ -1,18 +1,30 @@
 {
   "type": "panel",
   "name": "Annotation List",
-  "id": "annolist",
+  "id": "ryantxu-annolist-panel",
 
   "info": {
-    "description": "List of Annotations",
+    "description": "List of builtin Annotations",
     "author": {
-      "name": "Grafana Project",
-      "url": "https://grafana.com"
+      "name": "ryantxu"
     },
+    "keywords": ["annotations", "list"],
     "logos": {
-      "small": "img/icn-annolist-panel.svg",
-      "large": "img/icn-annolist-panel.svg"
+      "small": "img/annolist-icon.svg",
+      "large": "img/annolist-icon.svg"
     },
-    "version": "5.0.2"
+    "links": [
+      {"name": "Project site", "url": "https://github.com/ryantxu/annotations-panel"},
+      {
+        "name": "MIT License",
+        "url": "https://github.com/ryantxu/annotations-panel/blob/master/LICENSE"
+      }
+    ],
+    "screenshots": [
+      {"name": "Options", "path": "img/screenshot-options.png"},
+      {"name": "Link",    "path": "img/screenshot-link.png"}
+    ],
+    "version": "0.0.1",
+    "updated": "2018-03-21"
   }
 }

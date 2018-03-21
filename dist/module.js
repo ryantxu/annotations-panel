@@ -1,5 +1,5 @@
 ///<reference path="../node_modules/grafana-sdk-mocks/app/headers/common.d.ts" />
-System.register(['lodash', 'app/plugins/sdk', 'moment'], function(exports_1) {
+System.register(['lodash', 'app/plugins/sdk', 'moment', './css/annolist.css!'], function(exports_1) {
     var __extends = (this && this.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
@@ -17,7 +17,8 @@ System.register(['lodash', 'app/plugins/sdk', 'moment'], function(exports_1) {
             },
             function (moment_1_1) {
                 moment_1 = moment_1_1;
-            }],
+            },
+            function (_1) {}],
         execute: function() {
             AnnoListCtrl = (function (_super) {
                 __extends(AnnoListCtrl, _super);

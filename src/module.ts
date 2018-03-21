@@ -4,6 +4,8 @@ import _ from 'lodash';
 import {PanelCtrl} from 'app/plugins/sdk';
 import moment from 'moment';
 
+import './css/annolist.css!';
+
 class AnnoListCtrl extends PanelCtrl {
   static templateUrl = 'module.html';
   static scrollable = true;
