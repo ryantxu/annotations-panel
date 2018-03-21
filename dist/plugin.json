@@ -22,7 +22,7 @@
     ],
     "screenshots": [
       {"name": "Options", "path": "img/screenshot-options.png"},
-      {"name": "Link",    "path": "img/screenshot-link.png"}
+      {"name": "Link", "path": "img/screenshot-link.png"}
     ],
     "version": "0.0.1",
     "updated": "2018-03-21"
