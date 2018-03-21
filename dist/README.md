@@ -1,11 +1,11 @@
 ## Annotations List Panel
 
-Show annotaions
+Show list of annotations
 
 ### Screenshots
 
-* [Screenshot of the options screen](https://github.com/ryantxu/annotations-panel/master/src/img/screenshot-options.png)
-* [Screenshot of the options screen](https://github.com/ryantxu/annotations-panel/master/src/img/screenshot-link.png)
+* [Options](https://raw.githubusercontent.com/ryantxu/annotations-panel/master/src/img/screenshot-options.png)
+* [Links  ](https://raw.githubusercontent.com/ryantxu/annotations-panel/master/src/img/screenshot-link.png)
 
 #### Changelog
 
