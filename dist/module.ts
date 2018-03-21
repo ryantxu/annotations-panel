@@ -62,7 +62,7 @@ class AnnoListCtrl extends PanelCtrl {
     // http://docs.grafana.org/http_api/annotations/
     // https://github.com/grafana/grafana/blob/master/public/app/core/services/backend_srv.ts
     // https://github.com/grafana/grafana/blob/master/public/app/features/annotations/annotations_srv.ts
-    
+
     const params: any = {
       tags: this.panel.tags,
       limit: this.panel.limit,
@@ -118,20 +118,21 @@ class AnnoListCtrl extends PanelCtrl {
       if (res && res.length === 1 && res[0].id === anno.dashboardId) {
         const dash = res[0];
         let path = dash.url;
-        if(!path) { // before v5
+        if (!path) {
+          // before v5
           path = dash.uri;
         }
 
-        let params:any = {
+        let params: any = {
           from: range.from.valueOf().toString(),
           to: range.to.valueOf().toString(),
-        }
-        if(this.panel.navigateToPanel) {
+        };
+        if (this.panel.navigateToPanel) {
           params.panelId = anno.panelId;
           params.fullscreen = true;
         }
         const orgId = this.$location.search().orgId;
-        if(orgId) {
+        if (orgId) {
           params.orgId = orgId;
         }
         console.log('SEARCH', path, params);

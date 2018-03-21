@@ -101,6 +101,7 @@ System.register(['lodash', 'app/plugins/sdk', 'moment', './css/annolist.css!'], 
                             var dash = res[0];
                             var path = dash.url;
                             if (!path) {
+                                // before v5
                                 path = dash.uri;
                             }
                             var params = {
