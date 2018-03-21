@@ -51,7 +51,7 @@ System.register(['lodash', 'app/plugins/sdk', 'moment'], function(exports_1) {
                     // https://github.com/grafana/grafana/blob/master/public/app/features/annotations/annotations_srv.ts
                     var params = {
                         limit: this.panel.limit,
-                        tags: this.panel.tags
+                        tags: this.panel.tags,
                     };
                     if (this.panel.onlyFromThisDashboard) {
                         params.dashboardId = this.dashboard.id;
@@ -91,9 +91,7 @@ System.register(['lodash', 'app/plugins/sdk', 'moment'], function(exports_1) {
                         console.log('Same Dashboard!!');
                         return;
                     }
-                    this.backendSrv
-                        .get('/api/search', { dashboardIds: anno.dashboardId })
-                        .then(function (res) {
+                    this.backendSrv.get('/api/search', { dashboardIds: anno.dashboardId }).then(function (res) {
                         if (res && res.length === 1 && res[0].id === anno.dashboardId) {
                             // TODO... is there a better way?
                             console.log('GOTO Dashboard:', res[0]);
@@ -111,7 +109,7 @@ System.register(['lodash', 'app/plugins/sdk', 'moment'], function(exports_1) {
                         else {
                             console.log('Unable to find dashboard...', anno);
                             _this.$rootScope.appEvent('alert-warning', [
-                                'Error Loading Dashboard: ' + anno.dashbardId
+                                'Error Loading Dashboard: ' + anno.dashbardId,
                             ]);
                         }
                     });
