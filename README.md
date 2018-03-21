@@ -11,7 +11,8 @@ Show list of annotations
 
 ##### v0.0.1
 
-* Quick and Dirty, but it works!
+* Works in v4 and v5
+* First working version
 
 #### TODO:
 

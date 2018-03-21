@@ -12,6 +12,8 @@
         <span class="dashlist-title">
           {{anno.text}}
         </span>
+
+        <!-- Right Aligned -->
         <span class="pluginlist-message">
           <span ng-show="ctrl.panel.showUser && anno.login" class="graph-annotation">
             <span class="graph-annotation__user" bs-tooltip="'Created by:<br/> {{anno.email}}'">
@@ -28,9 +30,15 @@
             {{tag}}
           </span>
         </span>
+
+        <!-- small grey text -->
         <span class="pluginlist-version">
           <span ng-show="ctrl.panel.showTime">
             {{ ctrl.dashboard.formatDate(anno.time) }}
+          </span>
+
+          <span ng-show="ctrl.panel.showAnnoJSON">
+            {{ anno | json }}
           </span>
         </span>
       </a>

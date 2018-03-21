@@ -114,13 +114,21 @@ class AnnoListCtrl extends PanelCtrl {
       return;
     }
 
+    if (anno.dashboardId === 0) {
+      this.$rootScope.appEvent('alert-warning', [
+        'Invalid Annotation Dashboard',
+        'Annotation on dashboard: 0 (new?)',
+      ]);
+      return;
+    }
+
     this.backendSrv.get('/api/search', {dashboardIds: anno.dashboardId}).then(res => {
       if (res && res.length === 1 && res[0].id === anno.dashboardId) {
         const dash = res[0];
         let path = dash.url;
         if (!path) {
-          // before v5
-          path = dash.uri;
+          // before v5.
+          path = '/dashboard/' + dash.uri;
         }
 
         let params: any = {
@@ -140,7 +148,7 @@ class AnnoListCtrl extends PanelCtrl {
       } else {
         console.log('Unable to find dashboard...', anno);
         this.$rootScope.appEvent('alert-warning', [
-          'Error Loading Dashboard: ' + anno.dashbardId,
+          'Unknown Dashboard: ' + anno.dashboardId,
         ]);
       }
     });

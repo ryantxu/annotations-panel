@@ -96,13 +96,20 @@ System.register(['lodash', 'app/plugins/sdk', 'moment', './css/annolist.css!'], 
                         }
                         return;
                     }
+                    if (anno.dashboardId === 0) {
+                        this.$rootScope.appEvent('alert-warning', [
+                            'Invalid Annotation Dashboard',
+                            'Annotation on dashboard: 0 (new?)',
+                        ]);
+                        return;
+                    }
                     this.backendSrv.get('/api/search', { dashboardIds: anno.dashboardId }).then(function (res) {
                         if (res && res.length === 1 && res[0].id === anno.dashboardId) {
                             var dash = res[0];
                             var path = dash.url;
                             if (!path) {
-                                // before v5
-                                path = dash.uri;
+                                // before v5.
+                                path = '/dashboard/' + dash.uri;
                             }
                             var params = {
                                 from: range.from.valueOf().toString(),
@@ -122,7 +129,7 @@ System.register(['lodash', 'app/plugins/sdk', 'moment', './css/annolist.css!'], 
                         else {
                             console.log('Unable to find dashboard...', anno);
                             _this.$rootScope.appEvent('alert-warning', [
-                                'Error Loading Dashboard: ' + anno.dashbardId,
+                                'Unknown Dashboard: ' + anno.dashboardId,
                             ]);
                         }
                     });
