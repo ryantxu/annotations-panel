@@ -66,6 +66,7 @@ class AnnoListCtrl extends PanelCtrl {
     const params: any = {
       tags: this.panel.tags,
       limit: this.panel.limit,
+      alertId: 0, // Skip the Annotations that are really alerts.  (Use the alerts panel!)
     };
 
     if (this.panel.onlyFromThisDashboard) {

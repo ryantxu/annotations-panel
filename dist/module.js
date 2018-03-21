@@ -53,6 +53,7 @@ System.register(['lodash', 'app/plugins/sdk', 'moment', './css/annolist.css!'], 
                     var params = {
                         tags: this.panel.tags,
                         limit: this.panel.limit,
+                        alertId: 0,
                     };
                     if (this.panel.onlyFromThisDashboard) {
                         params.dashboardId = this.dashboard.id;
