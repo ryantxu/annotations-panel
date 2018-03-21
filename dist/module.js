@@ -22,11 +22,13 @@ System.register(['lodash', 'app/plugins/sdk', 'moment'], function(exports_1) {
             AnnoListCtrl = (function (_super) {
                 __extends(AnnoListCtrl, _super);
                 /** @ngInject */
-                function AnnoListCtrl($scope, $injector, backendSrv, annotationsSrv, dashboardSrv) {
+                function AnnoListCtrl($scope, $injector, $rootScope, backendSrv, dashboardSrv, timeSrv, $location) {
                     _super.call(this, $scope, $injector);
+                    this.$rootScope = $rootScope;
                     this.backendSrv = backendSrv;
-                    this.annotationsSrv = annotationsSrv;
                     this.dashboardSrv = dashboardSrv;
+                    this.timeSrv = timeSrv;
+                    this.$location = $location;
                     this.found = [];
                     lodash_1.default.defaults(this.panel, AnnoListCtrl.panelDefaults);
                     $scope.moment = moment_1.default;
@@ -49,19 +51,70 @@ System.register(['lodash', 'app/plugins/sdk', 'moment'], function(exports_1) {
                     // https://github.com/grafana/grafana/blob/master/public/app/features/annotations/annotations_srv.ts
                     var params = {
                         limit: this.panel.limit,
-                        tags: this.panel.tags,
-                        folderId: this.panel.folderId,
+                        tags: this.panel.tags
                     };
+                    if (this.panel.onlyFromThisDashboard) {
+                        params.dashboardId = this.dashboard.id;
+                    }
                     return this.backendSrv.get('/api/annotations', params).then(function (result) {
                         _this.found = result;
                     });
                 };
+                AnnoListCtrl.prototype._timeOffset = function (time, offset, subtract) {
+                    if (subtract === void 0) { subtract = false; }
+                    var incr = 5;
+                    var unit = 'm';
+                    var parts = /^(\d+)(\w)/.exec(offset);
+                    if (parts && parts.length === 3) {
+                        incr = parseInt(parts[1]);
+                        unit = parts[2];
+                    }
+                    var t = moment_1.default.utc(time);
+                    if (subtract) {
+                        incr *= -1;
+                    }
+                    t.add(incr, unit);
+                    return t;
+                };
                 AnnoListCtrl.prototype.selectAnno = function (anno, evt) {
-                    console.log('GOTO', anno);
+                    var _this = this;
+                    var range = {
+                        from: this._timeOffset(anno.time, this.panel.navigateBefore, true),
+                        to: this._timeOffset(anno.time, this.panel.navigateAfter, false),
+                    };
+                    this.timeSrv.setTime(range);
                     if (evt) {
                         evt.stopPropagation();
                         evt.preventDefault();
                     }
+                    if (this.dashboard.id === anno.dasboardId) {
+                        console.log('Same Dashboard!!');
+                        return;
+                    }
+                    this.backendSrv
+                        .get('/api/search', { dashboardIds: anno.dashboardId })
+                        .then(function (res) {
+                        if (res && res.length === 1 && res[0].id === anno.dashboardId) {
+                            // TODO... is there a better way?
+                            console.log('GOTO Dashboard:', res[0]);
+                            _this.$location.path(res[0].url);
+                            _this.$location.search('edit', null);
+                            if (_this.panel.navigateToPanel) {
+                                _this.$location.search('panelId', anno.panelId);
+                                _this.$location.search('fullscreen', true);
+                            }
+                            else {
+                                _this.$location.search('panelId', null);
+                                _this.$location.search('fullscreen', null);
+                            }
+                        }
+                        else {
+                            console.log('Unable to find dashboard...', anno);
+                            _this.$rootScope.appEvent('alert-warning', [
+                                'Error Loading Dashboard: ' + anno.dashbardId
+                            ]);
+                        }
+                    });
                 };
                 AnnoListCtrl.prototype.selectTag = function (anno, tag, evt) {
                     console.log('TAG', anno, tag);
@@ -75,10 +128,13 @@ System.register(['lodash', 'app/plugins/sdk', 'moment'], function(exports_1) {
                 AnnoListCtrl.panelDefaults = {
                     limit: 10,
                     tags: [],
+                    onlyFromThisDashboard: false,
                     showTags: true,
                     showUser: true,
                     showTime: true,
-                    showTimeFormat: 'LTS',
+                    navigateBefore: '10m',
+                    navigateAfter: '10m',
+                    navigateToPanel: true,
                 };
                 return AnnoListCtrl;
             })(sdk_1.PanelCtrl);

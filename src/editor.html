@@ -42,6 +42,13 @@
     </div>
   -->
 
+    <gf-form-switch 
+      class="gf-form" 
+      label="Only This Dashboard" 
+      label-class="width-12" 
+      checked="ctrl.panel.onlyFromThisDashboard" 
+      on-change="ctrl.refresh()"></gf-form-switch>
+
     <div class="gf-form">
       <span class="gf-form-label width-7">Tags</span>
       <bootstrap-tagsinput 
@@ -56,5 +63,33 @@
       <span class="gf-form-label width-7">Max items</span>
       <input class="gf-form-input max-width-5" type="number" ng-model="ctrl.panel.limit" ng-model-onblur ng-change="ctrl.refresh()">
     </div>
+  </div>
+
+
+  <div class="section gf-form-group">
+    <h5 class="section-heading">Navigate</h5>
+    <div class="gf-form">
+      <span class="gf-form-label width-7">Before</span>
+      <input class="gf-form-input max-width-5" 
+        placeholder="1h" 
+        ng-model="ctrl.panel.navigateBefore" 
+        ng-model-onblur 
+        ng-change="ctrl.refresh()">
+    </div>
+    <div class="gf-form">
+      <span class="gf-form-label width-7">After</span>
+      <input class="gf-form-input max-width-5" 
+        placeholder="1h" 
+        ng-model="ctrl.panel.navigateAfter" 
+        ng-model-onblur 
+        ng-change="ctrl.refresh()">
+    </div>
+    <gf-form-switch 
+      class="gf-form" 
+      label="To Panel" 
+      label-class="width-7" 
+      checked="ctrl.panel.navigateToPanel" 
+      on-change="ctrl.refresh()"></gf-form-switch>
+
   </div>
 </div>
