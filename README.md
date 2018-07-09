@@ -1,5 +1,9 @@
 ## Annotations List Panel
 
+[![CircleCI](https://circleci.com/gh/ryantxu/annotations-panel/tree/master.svg?style=svg)](https://circleci.com/gh/ryantxu/annotations-panel/tree/master)
+[![dependencies Status](https://david-dm.org/ryantxu/annotations-panel/status.svg)](https://david-dm.org/ryantxu/annotations-panel)
+[![devDependencies Status](https://david-dm.org/ryantxu/annotations-panel/dev-status.svg)](https://david-dm.org/ryantxu/annotations-panel?type=dev)
+
 Show list of annotations
 
 ### Screenshots
