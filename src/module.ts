@@ -4,7 +4,7 @@ import _ from 'lodash';
 import {PanelCtrl} from 'app/plugins/sdk';
 import moment from 'moment';
 
-import './css/annolist.css!';
+import './css/annolist.css';
 
 class AnnoListCtrl extends PanelCtrl {
   static templateUrl = 'module.html';
@@ -32,7 +32,6 @@ class AnnoListCtrl extends PanelCtrl {
     $injector,
     private $rootScope,
     private backendSrv,
-    private dashboardSrv,
     private timeSrv,
     private $location
   ) {
@@ -51,14 +50,14 @@ class AnnoListCtrl extends PanelCtrl {
   }
 
   onRefresh() {
-    var promises = [];
+    var promises: Promise<any>[] = [];
 
     promises.push(this.getSearch());
 
     return Promise.all(promises).then(this.renderingCompleted.bind(this));
   }
 
-  getSearch() {
+  getSearch(): Promise<any> {
     // http://docs.grafana.org/http_api/annotations/
     // https://github.com/grafana/grafana/blob/master/public/app/core/services/backend_srv.ts
     // https://github.com/grafana/grafana/blob/master/public/app/features/annotations/annotations_srv.ts
