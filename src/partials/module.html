@@ -1,7 +1,7 @@
 <div class="dashlist">
   <div class="dashlist-section" ng-if="ctrl.found">
     <!--
-    <h6 class="dashlist-section-header" ng-show="ctrl.panel.headings">
+    <h6 class="dashlist-section-header" ng-if="ctrl.panel.headings">
       {{group.header}}
     </h6>
   -->
@@ -15,15 +15,18 @@
 
         <!-- Right Aligned -->
         <span class="pluginlist-message">
-          <span ng-show="ctrl.panel.showUser && anno.login" class="graph-annotation">
-            <span class="graph-annotation__user" bs-tooltip="'Created by:<br/> {{anno.email}}'">
-              <img src="{{anno.avatarUrl}}" />
+          <span ng-if="ctrl.panel.showUser && anno.login" class="graph-annotation">
+            <span  
+              ng-click="ctrl.queryAnnotationUser(anno, $event)" 
+              class="graph-annotation__user" 
+              bs-tooltip="'Created by:<br/> {{anno.email}}'">
+              <img ng-src="{{anno.avatarUrl}}" />
             </span>
           </span>
 
           <span
-            ng-show="ctrl.panel.showTags" 
-            ng-click="ctrl.selectTag(anno, tag, $event)" 
+            ng-if="ctrl.panel.showTags" 
+            ng-click="ctrl.queryAnnotationTag(anno, tag, $event)" 
             ng-repeat="tag in anno.tags" 
             tag-color-from-name="tag" 
             class="label label-tag">
@@ -33,11 +36,11 @@
 
         <!-- small grey text -->
         <span class="pluginlist-version">
-          <span ng-show="ctrl.panel.showTime">
+          <span ng-if="ctrl.panel.showTime">
             {{ ctrl.dashboard.formatDate(anno.time) }}
           </span>
 
-          <span ng-show="ctrl.panel.showAnnoJSON">
+          <span ng-if="ctrl.panel.showAnnoJSON">
             {{ anno | json }}
           </span>
         </span>

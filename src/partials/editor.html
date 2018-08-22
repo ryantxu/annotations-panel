@@ -33,6 +33,32 @@
   </div>
 
   <div class="section gf-form-group">
+    <h5 class="section-heading">Navigate</h5>
+    <div class="gf-form">
+      <span class="gf-form-label width-7">Before</span>
+      <input class="gf-form-input max-width-5" 
+        placeholder="1h" 
+        ng-model="ctrl.panel.navigateBefore" 
+        ng-model-onblur 
+        ng-change="ctrl.refresh()">
+    </div>
+    <div class="gf-form">
+      <span class="gf-form-label width-7">After</span>
+      <input class="gf-form-input max-width-5" 
+        placeholder="1h" 
+        ng-model="ctrl.panel.navigateAfter" 
+        ng-model-onblur 
+        ng-change="ctrl.refresh()">
+    </div>
+    <gf-form-switch 
+      class="gf-form" 
+      label="To Panel" 
+      label-class="width-7" 
+      checked="ctrl.panel.navigateToPanel" 
+      on-change="ctrl.refresh()"></gf-form-switch>
+  </div>
+  
+  <div class="section gf-form-group">
     <h5 class="section-heading">Search</h5>
 
     <gf-form-switch 
@@ -65,30 +91,4 @@
     </div>
   </div>
 
-  <div class="section gf-form-group">
-    <h5 class="section-heading">Navigate</h5>
-    <div class="gf-form">
-      <span class="gf-form-label width-7">Before</span>
-      <input class="gf-form-input max-width-5" 
-        placeholder="1h" 
-        ng-model="ctrl.panel.navigateBefore" 
-        ng-model-onblur 
-        ng-change="ctrl.refresh()">
-    </div>
-    <div class="gf-form">
-      <span class="gf-form-label width-7">After</span>
-      <input class="gf-form-input max-width-5" 
-        placeholder="1h" 
-        ng-model="ctrl.panel.navigateAfter" 
-        ng-model-onblur 
-        ng-change="ctrl.refresh()">
-    </div>
-    <gf-form-switch 
-      class="gf-form" 
-      label="To Panel" 
-      label-class="width-7" 
-      checked="ctrl.panel.navigateToPanel" 
-      on-change="ctrl.refresh()"></gf-form-switch>
-
-  </div>
 </div>

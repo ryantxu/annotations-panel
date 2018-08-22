@@ -11,6 +11,11 @@ class AnnoListCtrl extends PanelCtrl {
   static scrollable = true;
 
   found: any[] = [];
+  timeInfo?: string; // TODO shoudl be defined in Types
+
+  queryUserId?: number;
+  queryUser?: string;
+  queryTagValue?: string;
 
   static panelDefaults = {
     limit: 10,
@@ -75,10 +80,28 @@ class AnnoListCtrl extends PanelCtrl {
       params.dashboardId = this.dashboard.id;
     }
 
+    let timeInfo = '';
     if (this.panel.onlyInTimeRange) {
       let range = this.timeSrv.timeRange();
       params.from = range.from.valueOf();
       params.to = range.to.valueOf();
+    } else {
+      timeInfo = 'All Time';
+    }
+    this.timeInfo = timeInfo;
+
+    if (this.queryUserId !== undefined) {
+      params.userId = this.queryUserId;
+      this.timeInfo += ' ' + this.queryUser;
+    }
+
+    if (this.queryTagValue) {
+      if (params.tags) {
+        params.tags.push(this.queryTagValue);
+      } else {
+        params.tags = [this.queryTagValue];
+      }
+      this.timeInfo += ' ' + this.queryTagValue;
     }
 
     return this.backendSrv.get('/api/annotations', params).then(result => {
@@ -163,12 +186,25 @@ class AnnoListCtrl extends PanelCtrl {
     });
   }
 
-  selectTag(anno: any, tag: string, evt?: any) {
-    console.log('TAG', anno, tag);
+  queryAnnotationUser(anno: any, evt?: any) {
     if (evt) {
       evt.stopPropagation();
       evt.preventDefault();
     }
+    this.queryUserId = anno.userId;
+    this.queryUser = anno.login;
+    console.log('Query User', anno, this);
+    this.refresh();
+  }
+
+  queryAnnotationTag(anno: any, tag: string, evt?: any) {
+    if (evt) {
+      evt.stopPropagation();
+      evt.preventDefault();
+    }
+    this.queryTagValue = tag;
+    console.log('Query Tag', tag, anno, this);
+    this.refresh();
   }
 }
 
