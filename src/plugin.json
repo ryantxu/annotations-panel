@@ -26,5 +26,8 @@
     ],
     "version": "%VERSION%",
     "updated": "%TODAY%"
+  },
+  "dependencies": {
+    "grafanaVersion": "5.2.x"
   }
 }

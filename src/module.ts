@@ -7,7 +7,7 @@ import moment from 'moment';
 import './css/annolist.css';
 
 class AnnoListCtrl extends PanelCtrl {
-  static templateUrl = 'module.html';
+  static templateUrl = 'partials/module.html';
   static scrollable = true;
 
   found: any[] = [];
@@ -46,18 +46,21 @@ class AnnoListCtrl extends PanelCtrl {
 
   onInitEditMode() {
     this.editorTabIndex = 1;
-    this.addEditorTab('Options', 'public/plugins/ryantxu-annolist-panel/editor.html');
+    this.addEditorTab(
+      'Options',
+      'public/plugins/ryantxu-annolist-panel/partials/editor.html'
+    );
   }
 
   onRefresh() {
     var promises: Promise<any>[] = [];
 
-    promises.push(this.getSearch());
+    promises.push(this.getAnnotationSearch());
 
     return Promise.all(promises).then(this.renderingCompleted.bind(this));
   }
 
-  getSearch(): Promise<any> {
+  getAnnotationSearch(): Promise<any> {
     // http://docs.grafana.org/http_api/annotations/
     // https://github.com/grafana/grafana/blob/master/public/app/core/services/backend_srv.ts
     // https://github.com/grafana/grafana/blob/master/public/app/features/annotations/annotations_srv.ts
@@ -65,11 +68,17 @@ class AnnoListCtrl extends PanelCtrl {
     const params: any = {
       tags: this.panel.tags,
       limit: this.panel.limit,
-      alertId: 0, // Skip the Annotations that are really alerts.  (Use the alerts panel!)
+      type: 'annotation', // Skip the Annotations that are really alerts.  (Use the alerts panel!)
     };
 
     if (this.panel.onlyFromThisDashboard) {
       params.dashboardId = this.dashboard.id;
+    }
+
+    if (this.panel.onlyInTimeRange) {
+      let range = this.timeSrv.timeRange();
+      params.from = range.from.valueOf();
+      params.to = range.to.valueOf();
     }
 
     return this.backendSrv.get('/api/annotations', params).then(result => {

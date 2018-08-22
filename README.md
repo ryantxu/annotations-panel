@@ -15,7 +15,7 @@ Show list of annotations
 
 ##### v0.0.1
 
-* Works in v4 and v5
+* Works in v5... (API added to suppot type=annotation vs alert)
 * First working version
 
 #### TODO:

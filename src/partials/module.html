@@ -46,9 +46,10 @@
   </div>
   
   <!-- NOT Found message -->
-  <div class="dashlist-section" ng-hide="ctrl.found.length > 0">
-    <h6 class="dashlist-section-header" ng-show="ctrl.panel.headings">
+  <div class="dashlist-section" ng-if="ctrl.found.length < 1">
+    <h6 class="dashlist-section-header">
       No Annotations Found
+      <span ng-if="ctrl.panel.onlyInTimeRange"> in this time range</span>
     </h6>
   </div>
 </div>
