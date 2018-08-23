@@ -4,7 +4,7 @@
 [![dependencies Status](https://david-dm.org/ryantxu/annotations-panel/status.svg)](https://david-dm.org/ryantxu/annotations-panel)
 [![devDependencies Status](https://david-dm.org/ryantxu/annotations-panel/dev-status.svg)](https://david-dm.org/ryantxu/annotations-panel?type=dev)
 
-Show list of annotations
+Show user annotations in grafana database
 
 ### Screenshots
 
