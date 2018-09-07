@@ -1,6 +1,6 @@
 {
   "name": "annolist",
-  "version": "0.0.1-dev",
+  "version": "0.0.1",
   "description": "Annotations List",
   "scripts": {
     "build": "webpack --config webpack.config.prod.js",

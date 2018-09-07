@@ -1,0 +1,33 @@
+{
+  "type": "panel",
+  "name": "Annotation List",
+  "id": "ryantxu-annolist-panel",
+
+  "info": {
+    "description": "List of builtin Annotations",
+    "author": {
+      "name": "ryantxu"
+    },
+    "keywords": ["annotations", "list"],
+    "logos": {
+      "small": "img/annolist-icon.svg",
+      "large": "img/annolist-icon.svg"
+    },
+    "links": [
+      {"name": "Project site", "url": "https://github.com/ryantxu/annotations-panel"},
+      {
+        "name": "MIT License",
+        "url": "https://github.com/ryantxu/annotations-panel/blob/master/LICENSE"
+      }
+    ],
+    "screenshots": [
+      {"name": "Options", "path": "img/screenshot-options.png"},
+      {"name": "Link", "path": "img/screenshot-link.png"}
+    ],
+    "version": "0.0.1",
+    "updated": "2018-09-07"
+  },
+  "dependencies": {
+    "grafanaVersion": "5.2.x"
+  }
+}

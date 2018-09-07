@@ -1,0 +1,94 @@
+<div>
+  <div class="section gf-form-group">
+    <h5 class="section-heading">Display</h5>
+
+    <gf-form-switch 
+      class="gf-form" 
+      label="Show User" 
+      label-class="width-9" 
+      checked="ctrl.panel.showUser" 
+      on-change="ctrl.refresh()"></gf-form-switch>
+
+    <gf-form-switch 
+      class="gf-form" 
+      label="Show Time" 
+      label-class="width-9" 
+      checked="ctrl.panel.showTime" 
+      on-change="ctrl.refresh()"></gf-form-switch>
+      
+    <gf-form-switch 
+      class="gf-form" 
+      label="Show Tags" 
+      label-class="width-9" 
+      checked="ctrl.panel.showTags" 
+      on-change="ctrl.refresh()"></gf-form-switch>
+
+    <gf-form-switch 
+      class="gf-form" 
+      label="Debug Info" 
+      label-class="width-9" 
+      checked="ctrl.panel.showAnnoJSON" 
+      on-change="ctrl.refresh()"></gf-form-switch>
+
+  </div>
+
+  <div class="section gf-form-group">
+    <h5 class="section-heading">Navigate</h5>
+    <div class="gf-form">
+      <span class="gf-form-label width-7">Before</span>
+      <input class="gf-form-input max-width-5" 
+        placeholder="1h" 
+        ng-model="ctrl.panel.navigateBefore" 
+        ng-model-onblur 
+        ng-change="ctrl.refresh()">
+    </div>
+    <div class="gf-form">
+      <span class="gf-form-label width-7">After</span>
+      <input class="gf-form-input max-width-5" 
+        placeholder="1h" 
+        ng-model="ctrl.panel.navigateAfter" 
+        ng-model-onblur 
+        ng-change="ctrl.refresh()">
+    </div>
+    <gf-form-switch 
+      class="gf-form" 
+      label="To Panel" 
+      label-class="width-7" 
+      checked="ctrl.panel.navigateToPanel" 
+      on-change="ctrl.refresh()"></gf-form-switch>
+  </div>
+  
+  <div class="section gf-form-group">
+    <h5 class="section-heading">Search</h5>
+
+    <gf-form-switch 
+      class="gf-form" 
+      label="Only This Dashboard" 
+      label-class="width-12" 
+      checked="ctrl.panel.onlyFromThisDashboard" 
+      on-change="ctrl.refresh()"></gf-form-switch>
+
+    <gf-form-switch 
+      class="gf-form" 
+      label="Within Time Range" 
+      label-class="width-12" 
+      checked="ctrl.panel.onlyInTimeRange" 
+      on-change="ctrl.refresh()"></gf-form-switch>
+
+    <div class="gf-form">
+      <span class="gf-form-label width-7">Tags</span>
+      <bootstrap-tagsinput 
+        ng-model="ctrl.panel.tags" 
+        tagclass="label label-tag" 
+        placeholder="search tags" 
+        on-tags-updated="ctrl.refresh()">
+      </bootstrap-tagsinput>
+    </div>
+
+    <div class="gf-form">
+      <span class="gf-form-label width-7">Max items</span>
+      <input class="gf-form-input max-width-5" type="number" ng-model="ctrl.panel.limit" ng-model-onblur ng-change="ctrl.refresh()">
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,58 @@
+<div class="dashlist">
+  <div class="dashlist-section" ng-if="ctrl.found">
+    <!--
+    <h6 class="dashlist-section-header" ng-if="ctrl.panel.headings">
+      {{group.header}}
+    </h6>
+  -->
+    <div class="dashlist-item" ng-repeat="anno in ctrl.found">
+      <a class="dashlist-link dashlist-link-{{anno.type}}" 
+        ng-click="ctrl.selectAnno(anno, $event);" 
+        href="#">
+        <span class="dashlist-title">
+          {{anno.text}}
+        </span>
+
+        <!-- Right Aligned -->
+        <span class="pluginlist-message">
+          <span ng-if="ctrl.panel.showUser && anno.login" class="graph-annotation">
+            <span  
+              ng-click="ctrl.queryAnnotationUser(anno, $event)" 
+              class="graph-annotation__user" 
+              bs-tooltip="'Created by:<br/> {{anno.email}}'">
+              <img ng-src="{{anno.avatarUrl}}" />
+            </span>
+          </span>
+
+          <span
+            ng-if="ctrl.panel.showTags" 
+            ng-click="ctrl.queryAnnotationTag(anno, tag, $event)" 
+            ng-repeat="tag in anno.tags" 
+            tag-color-from-name="tag" 
+            class="label label-tag">
+            {{tag}}
+          </span>
+        </span>
+
+        <!-- small grey text -->
+        <span class="pluginlist-version">
+          <span ng-if="ctrl.panel.showTime">
+            {{ ctrl.dashboard.formatDate(anno.time) }}
+          </span>
+
+          <span ng-if="ctrl.panel.showAnnoJSON">
+            {{ anno | json }}
+          </span>
+        </span>
+      </a>
+    </div>
+  </div>
+  
+  <!-- NOT Found message -->
+  <div class="dashlist-section" ng-if="ctrl.found.length < 1">
+    <h6 class="dashlist-section-header">
+      No Annotations Found
+      <span ng-if="ctrl.panel.onlyInTimeRange"> in this time range</span>
+    </h6>
+  </div>
+</div>
