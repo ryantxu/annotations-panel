@@ -40,7 +40,7 @@
     "no-eval": true,
     "no-inferrable-types": true,
     "no-namespace": [true, "allow-declarations"],
-    "no-reference": true,
+    "no-reference": false,
     "no-shadowed-variable": false,
     "no-string-literal": false,
     "no-switch-case-fall-through": false,

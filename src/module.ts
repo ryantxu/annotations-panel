@@ -51,14 +51,11 @@ class AnnoListCtrl extends PanelCtrl {
 
   onInitEditMode() {
     this.editorTabIndex = 1;
-    this.addEditorTab(
-      'Options',
-      'public/plugins/ryantxu-annolist-panel/partials/editor.html'
-    );
+    this.addEditorTab('Options', 'public/plugins/ryantxu-annolist-panel/partials/editor.html');
   }
 
   onRefresh() {
-    var promises: Promise<any>[] = [];
+    const promises: Array<Promise<any>> = [];
 
     promises.push(this.getAnnotationSearch());
 
@@ -82,7 +79,7 @@ class AnnoListCtrl extends PanelCtrl {
 
     let timeInfo = '';
     if (this.panel.onlyInTimeRange) {
-      let range = this.timeSrv.timeRange();
+      const range = this.timeSrv.timeRange();
       params.from = range.from.valueOf();
       params.to = range.to.valueOf();
     } else {
@@ -109,16 +106,16 @@ class AnnoListCtrl extends PanelCtrl {
     });
   }
 
-  _timeOffset(time: number, offset: string, subtract: boolean = false) {
+  _timeOffset(time: number, offset: string, subtract = false) {
     let incr = 5;
     let unit = 'm';
-    let parts = /^(\d+)(\w)/.exec(offset);
+    const parts = /^(\d+)(\w)/.exec(offset);
     if (parts && parts.length === 3) {
-      incr = parseInt(parts[1]);
+      incr = parseInt(parts[1], 10);
       unit = parts[2];
     }
 
-    let t = moment.utc(time);
+    const t = moment.utc(time);
     if (subtract) {
       incr *= -1;
     }
@@ -131,7 +128,7 @@ class AnnoListCtrl extends PanelCtrl {
       evt.stopPropagation();
       evt.preventDefault();
     }
-    let range = {
+    const range = {
       from: this._timeOffset(anno.time, this.panel.navigateBefore, true),
       to: this._timeOffset(anno.time, this.panel.navigateAfter, false),
     };
@@ -163,7 +160,7 @@ class AnnoListCtrl extends PanelCtrl {
           path = '/dashboard/' + dash.uri;
         }
 
-        let params: any = {
+        const params: any = {
           from: range.from.valueOf().toString(),
           to: range.to.valueOf().toString(),
         };
@@ -179,9 +176,7 @@ class AnnoListCtrl extends PanelCtrl {
         this.$location.path(path).search(params);
       } else {
         console.log('Unable to find dashboard...', anno);
-        this.$rootScope.appEvent('alert-warning', [
-          'Unknown Dashboard: ' + anno.dashboardId,
-        ]);
+        this.$rootScope.appEvent('alert-warning', ['Unknown Dashboard: ' + anno.dashboardId]);
       }
     });
   }
